@@ -19,43 +19,39 @@ use App\Http\Controllers\API\ChatController;
 // Public routes
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
 // Protected routes
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:api')->group(function () {
     // Auth routes
+    Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('profile', [AuthController::class, 'profile']);
-    Route::put('profile', [AuthController::class, 'updateProfile']);
 
     // Property routes
     Route::apiResource('properties', PropertyController::class);
-    Route::get('properties/search', [PropertyController::class, 'search']);
+    Route::get('properties/statistics', [PropertyController::class, 'statistics']);
 
     // Rental routes
     Route::apiResource('rentals', RentalController::class);
-    Route::get('rental-history', [RentalController::class, 'getRentalHistory']);
+    Route::post('rentals/{id}/terminate', [RentalController::class, 'terminate']);
 
     // Payment routes
-    Route::apiResource('payments', PaymentController::class);
-    Route::get('payment-history', [PaymentController::class, 'getPaymentHistory']);
-    Route::get('payment-statistics', [PaymentController::class, 'getPaymentStatistics']);
+    Route::apiResource('payments', PaymentController::class, ['except' => ['destroy']]);
+    Route::post('payments/{id}/status', [PaymentController::class, 'updateStatus']);
+    Route::get('payments/statistics', [PaymentController::class, 'statistics']);
 
     // Maintenance request routes
     Route::apiResource('maintenance-requests', MaintenanceRequestController::class);
-    Route::post('maintenance-requests/{maintenance_request}/comments', 
-        [MaintenanceRequestController::class, 'addComment']);
-    Route::get('maintenance-statistics', 
-        [MaintenanceRequestController::class, 'getStatistics']);
+    Route::get('maintenance-requests/statistics', [MaintenanceRequestController::class, 'statistics']);
 
     // Document routes
     Route::apiResource('documents', DocumentController::class);
-    Route::get('documents/{document}/download', 
-        [DocumentController::class, 'download']);
+    Route::get('documents/statistics', [DocumentController::class, 'statistics']);
 
     // Chat routes
-    Route::get('chat/messages', [ChatController::class, 'index']);
-    Route::post('chat/messages', [ChatController::class, 'store']);
-    Route::post('chat/messages/read', [ChatController::class, 'markAsRead']);
-    Route::get('chat/unread-count', [ChatController::class, 'getUnreadCount']);
-    Route::get('chat/conversations', [ChatController::class, 'getConversations']);
+    Route::get('chat/conversations', [ChatController::class, 'conversations']);
+    Route::get('chat/messages', [ChatController::class, 'messages']);
+    Route::post('chat/send', [ChatController::class, 'send']);
+    Route::get('chat/statistics', [ChatController::class, 'statistics']);
 });
