@@ -1,0 +1,54 @@
+sequenceDiagram
+    participant C as Client
+    participant A as Auth Service
+    participant P as Property Service
+    participant R as Rental Service
+    participant PM as Payment Service
+    participant S as Stripe API
+    participant W as WebSocket Server
+    participant D as Document Service
+    participant DB as Database
+
+    %% Authentication Flow
+    C->>A: Login Request
+    A->>DB: Validate Credentials
+    DB-->>A: User Data
+    A-->>C: JWT Token
+
+    %% Property Creation
+    C->>P: Create Property Request
+    P->>DB: Save Property Data
+    DB-->>P: Property Created
+    P-->>C: Property Details
+
+    %% Rent Payment Flow
+    C->>R: Initialize Rent Payment
+    R->>PM: Create Payment Intent
+    PM->>S: Create Stripe Payment Intent
+    S-->>PM: Payment Intent
+    PM-->>C: Payment Details
+    C->>S: Process Payment
+    S->>PM: Payment Webhook
+    PM->>DB: Update Payment Status
+    PM-->>C: Payment Confirmation
+
+    %% Maintenance Request
+    C->>P: Create Maintenance Request
+    P->>DB: Save Request
+    DB-->>P: Request Created
+    P->>W: Notify Landlord
+    W-->>C: Real-time Notification
+
+    %% Document Upload
+    C->>D: Upload Document
+    D->>D: Validate File
+    D->>D: Store in S3
+    D->>DB: Save Document Metadata
+    DB-->>D: Document Saved
+    D-->>C: Upload Confirmation
+
+    %% Chat Message
+    C->>W: Send Chat Message
+    W->>DB: Store Message
+    W-->>C: Message Delivered
+    W-->>C: Real-time Message Update

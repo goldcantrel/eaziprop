@@ -1,0 +1,115 @@
+classDiagram
+    class User {
+        -id: int
+        -name: string
+        -email: string
+        -password: string
+        -role: enum
+        -phone: string
+        -created_at: timestamp
+        -updated_at: timestamp
+        +register(data: array): User
+        +login(credentials: array): Token
+        +logout(): void
+        +updateProfile(data: array): User
+    }
+
+    class Property {
+        -id: int
+        -landlord_id: int
+        -name: string
+        -address: string
+        -type: string
+        -status: enum
+        -price: decimal
+        -created_at: timestamp
+        -updated_at: timestamp
+        +create(data: array): Property
+        +update(data: array): Property
+        +delete(): void
+        +assignTenant(tenant_id: int): bool
+        +removeTenant(tenant_id: int): bool
+    }
+
+    class Rental {
+        -id: int
+        -property_id: int
+        -tenant_id: int
+        -start_date: date
+        -end_date: date
+        -rent_amount: decimal
+        -status: enum
+        -created_at: timestamp
+        -updated_at: timestamp
+        +create(data: array): Rental
+        +update(data: array): Rental
+        +terminate(): void
+        +generateInvoice(): Invoice
+    }
+
+    class Payment {
+        -id: int
+        -rental_id: int
+        -amount: decimal
+        -payment_date: date
+        -status: enum
+        -stripe_payment_id: string
+        -created_at: timestamp
+        -updated_at: timestamp
+        +create(data: array): Payment
+        +processStripePayment(): bool
+        +generateReceipt(): Document
+        +refund(): bool
+    }
+
+    class MaintenanceRequest {
+        -id: int
+        -property_id: int
+        -tenant_id: int
+        -title: string
+        -description: text
+        -status: enum
+        -priority: enum
+        -created_at: timestamp
+        -updated_at: timestamp
+        +create(data: array): MaintenanceRequest
+        +update(data: array): MaintenanceRequest
+        +close(): void
+        +addComment(comment: string): Comment
+    }
+
+    class Document {
+        -id: int
+        -user_id: int
+        -property_id: int
+        -type: enum
+        -file_name: string
+        -file_path: string
+        -mime_type: string
+        -size: int
+        -created_at: timestamp
+        +upload(file: File): Document
+        +download(): File
+        +delete(): void
+    }
+
+    class ChatMessage {
+        -id: int
+        -property_id: int
+        -sender_id: int
+        -receiver_id: int
+        -message: text
+        -read_at: timestamp
+        -created_at: timestamp
+        +send(): void
+        +markAsRead(): void
+        +delete(): void
+    }
+
+    User "1" -- "*" Property : owns
+    User "1" -- "*" Rental : rents
+    Property "1" -- "*" Rental : has
+    Rental "1" -- "*" Payment : receives
+    Property "1" -- "*" MaintenanceRequest : has
+    Property "1" -- "*" Document : contains
+    Property "1" -- "*" ChatMessage : contains
