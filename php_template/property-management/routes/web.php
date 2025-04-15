@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Catch-all route to serve React application
+Route::get('/{path?}', function () {
+    return view('app');
+})->where('path', '.*');
