@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from './services/supabase';
 
 // Lazy load components for better performance
+const Home = React.lazy(() => import('./components/Home'));
 const Login = React.lazy(() => import('./components/auth/Login'));
 const Register = React.lazy(() => import('./components/auth/Register'));
 const Dashboard = React.lazy(() => import('./components/dashboard/Dashboard'));
@@ -52,9 +53,10 @@ function App() {
                 </div>
             }>
                 <Routes>
-                    <Route path="/login" element={!session ? <Login /> : <Navigate to="/" />} />
-                    <Route path="/register" element={!session ? <Register /> : <Navigate to="/" />} />
-                    <Route path="/" element={session ? <Dashboard /> : <Navigate to="/login" />} />
+                    <Route path="/" element={!session ? <Home /> : <Navigate to="/dashboard" />} />
+                    <Route path="/login" element={!session ? <Login /> : <Navigate to="/dashboard" />} />
+                    <Route path="/register" element={!session ? <Register /> : <Navigate to="/dashboard" />} />
+                    <Route path="/dashboard" element={session ? <Dashboard /> : <Navigate to="/login" />} />
                     <Route path="/properties" element={session ? <Properties /> : <Navigate to="/login" />} />
                     <Route path="/rentals" element={session ? <Rentals /> : <Navigate to="/login" />} />
                     <Route path="/maintenance" element={session ? <Maintenance /> : <Navigate to="/login" />} />
