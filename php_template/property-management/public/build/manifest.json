@@ -1,0 +1,114 @@
+{
+  "_browser-D2b1q4Ph.js": {
+    "file": "assets/browser-D2b1q4Ph.js",
+    "name": "browser",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BzYc5hqY.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-Duh4pxuZ.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "_browser-D2b1q4Ph.js",
+      "resources/js/components/Home.jsx",
+      "resources/js/components/auth/Login.jsx",
+      "resources/js/components/auth/Register.jsx",
+      "resources/js/components/dashboard/Dashboard.jsx",
+      "resources/js/components/property/Properties.jsx",
+      "resources/js/components/rental/Rentals.jsx",
+      "resources/js/components/maintenance/Maintenance.jsx",
+      "resources/js/components/payment/Payments.jsx",
+      "resources/js/components/chat/Chat.jsx"
+    ]
+  },
+  "resources/js/components/Home.jsx": {
+    "file": "assets/Home-pNH2cSUd.js",
+    "name": "Home",
+    "src": "resources/js/components/Home.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/auth/Login.jsx": {
+    "file": "assets/Login-DmBbrQB8.js",
+    "name": "Login",
+    "src": "resources/js/components/auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/auth/Register.jsx": {
+    "file": "assets/Register-OWAEXsJz.js",
+    "name": "Register",
+    "src": "resources/js/components/auth/Register.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/chat/Chat.jsx": {
+    "file": "assets/Chat-Dpbc1MuH.js",
+    "name": "Chat",
+    "src": "resources/js/components/chat/Chat.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/dashboard/Dashboard.jsx": {
+    "file": "assets/Dashboard-DrbtTvLN.js",
+    "name": "Dashboard",
+    "src": "resources/js/components/dashboard/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/maintenance/Maintenance.jsx": {
+    "file": "assets/Maintenance-DC357QWU.js",
+    "name": "Maintenance",
+    "src": "resources/js/components/maintenance/Maintenance.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/payment/Payments.jsx": {
+    "file": "assets/Payments-BUTfJA1W.js",
+    "name": "Payments",
+    "src": "resources/js/components/payment/Payments.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/property/Properties.jsx": {
+    "file": "assets/Properties-CwW7oOl8.js",
+    "name": "Properties",
+    "src": "resources/js/components/property/Properties.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/components/rental/Rentals.jsx": {
+    "file": "assets/Rentals-DOTngDVx.js",
+    "name": "Rentals",
+    "src": "resources/js/components/rental/Rentals.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  }
+}
